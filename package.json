@@ -1,6 +1,6 @@
 {
   "name": "emc-mangadex",
-  "version": "0.1.0-alpha",
+  "version": "0.1.0",
   "description": "MangaDex API library for Electron Manga Client",
   "scripts": {
     "prepublish": "tsc"
