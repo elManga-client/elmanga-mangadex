@@ -1,21 +1,21 @@
 {
-  "name": "emc-mangadex",
-  "version": "0.1.0",
-  "description": "MangaDex API library for Electron Manga Client",
+  "name": "@elmanga/mangadex",
+  "version": "0.1.0-alpha",
+  "description": "MangaDex API library for ElManga Client",
   "scripts": {
     "prepublish": "tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/noisyboy25/emc-mangadex.git"
+    "url": "git+https://github.com/noisyboy25/elmanga-mangadex.git"
   },
   "keywords": [],
   "author": "noisyboy25",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/noisyboy25/emc-mangadex/issues"
+    "url": "https://github.com/noisyboy25/elmanga-mangadex/issues"
   },
-  "homepage": "https://github.com/noisyboy25/emc-mangadex#readme",
+  "homepage": "https://github.com/noisyboy25/elmanga-mangadex#readme",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "devDependencies": {
