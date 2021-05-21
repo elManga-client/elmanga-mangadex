@@ -1,2 +1,2 @@
 # elmanga-mangadex
-MangaDex API library for ElManga Client
+MangaDex API library for elManga Client
