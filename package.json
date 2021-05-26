@@ -1,6 +1,6 @@
 {
   "name": "@elmanga/mangadex-lib",
-  "version": "0.1.3-alpha",
+  "version": "0.1.4",
   "description": "MangaDex API library for elManga Client",
   "scripts": {
     "prepublish": "tsc"
