@@ -1,5 +1,5 @@
 export type MangaResponse = Response<Manga>;
-export type ChapterResponse = Response<Manga>;
+export type ChapterResponse = Response<Chapter>;
 
 export enum ResultStatuses {
   Ok = 'ok',
