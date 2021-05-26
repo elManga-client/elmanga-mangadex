@@ -1,4 +1,4 @@
-import fetch from 'unfetch';
+import fetch from 'cross-fetch';
 import { Chapter, Manga, Relationship } from './interfaces';
 
 export const getFirstManga = async (): Promise<Manga> => {
