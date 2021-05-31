@@ -1,5 +1,38 @@
 import fetch from 'cross-fetch';
-import { Chapter, ChapterResponse, Manga, Relationship } from './interfaces';
+import {
+  Chapter,
+  ChapterResponse,
+  Manga,
+  MangaListResponse,
+  MangaListOptions,
+} from './interfaces';
+
+const optionsToParams = (options: any): URLSearchParams => {
+  const params = new URLSearchParams(<Record<string, string>>options);
+  if (!options) return params;
+
+  Object.entries(options)
+    .filter(([_key, value]) => {
+      return Array.isArray(value);
+    })
+    .forEach(([key, value]) => {
+      params.delete(key);
+      params.set(`${key}[]`, (value as any[]).join(','));
+    });
+
+  return params;
+};
+
+export const getMangaList = async (
+  options?: MangaListOptions
+): Promise<MangaListResponse> => {
+  const url = new URL('https://api.mangadex.org/manga');
+  const params = optionsToParams(options);
+  url.search = params.toString();
+  console.log(url.href);
+  const res = await fetch(url.href);
+  return res.json();
+};
 
 export const getFirstManga = async (): Promise<Manga> => {
   const res = await fetch('https://api.mangadex.org/manga');
@@ -46,7 +79,5 @@ export const getPageUrl = async (
   serverBaseUrl: string,
   pageFileName: string
 ): Promise<string> => {
-  const pageUrl = `${serverBaseUrl}/data/${chapter.attributes.hash}/${pageFileName}`;
-
-  return pageUrl;
+  return `${serverBaseUrl}/data/${chapter.attributes.hash}/${pageFileName}`;
 };

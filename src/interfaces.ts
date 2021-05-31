@@ -8,8 +8,15 @@ export enum ResultStatuses {
 
 export interface Response<T> {
   result: ResultStatuses;
-  data: T[];
+  data: T;
   relationships: Relationship[];
+}
+
+export interface MangaListResponse {
+  results: MangaResponse[];
+  limit: number;
+  offset: number;
+  total: number;
 }
 
 export interface Manga {
@@ -72,4 +79,24 @@ export enum RelationshipTypes {
   Tag = 'tag',
   User = 'user',
   CustomList = 'custom_list',
+}
+
+export interface MangaListOptions {
+  limit?: number;
+  offset?: number;
+  title?: string;
+  authors?: string[];
+  artists?: string[];
+  year?: number;
+  includedTags?: string[];
+  includedTagsMode?: 'AND' | 'OR';
+  excludedTags?: string[];
+  excludedTagsMode?: 'AND' | 'OR';
+  status?: 'ongoing' | 'completed' | 'hiatus' | 'cancelled';
+  originalLanguage?: string[];
+  publicationDemographic?: 'shounen' | 'shoujo' | 'josei' | 'seinen' | 'none';
+  ids?: string[];
+  contentRating?: ('safe' | 'suggestive' | 'erotica' | 'pornographic')[];
+  createdAtSince?: string;
+  updatedAtSince?: string;
 }
