@@ -1,6 +1,9 @@
 export type MangaResponse = Response<Manga>;
 export type ChapterResponse = Response<Chapter>;
 
+export type MangaList = SearchList<Manga>;
+export type ChapterList = SearchList<Chapter>;
+
 export enum ResultStatuses {
   Ok = 'ok',
   Error = 'error',
@@ -12,8 +15,8 @@ export interface Response<T> {
   relationships: Relationship[];
 }
 
-export interface MangaListResponse {
-  results: MangaResponse[];
+export interface SearchList<T> {
+  results: Response<T>[];
   limit: number;
   offset: number;
   total: number;
@@ -81,7 +84,7 @@ export enum RelationshipTypes {
   CustomList = 'custom_list',
 }
 
-export interface MangaListOptions {
+export interface MangaSearchOptions {
   limit?: number;
   offset?: number;
   title?: string;
@@ -99,4 +102,28 @@ export interface MangaListOptions {
   contentRating?: ('safe' | 'suggestive' | 'erotica' | 'pornographic')[];
   createdAtSince?: string;
   updatedAtSince?: string;
+  order?: { createdAt: 'asc' | 'desc'; updatedAt: 'asc' | 'desc' };
+}
+
+export interface ChapterSearchOptions {
+  limit?: number;
+  offset?: number;
+  ids?: string[];
+  title?: string;
+  groups?: string[];
+  uploader?: string;
+  manga?: string;
+  volume?: string;
+  chapter?: string;
+  translatedLanguage?: string[];
+  createdAtSince?: string;
+  updatedAtSince?: string;
+  publishAtSince?: string;
+  order?: {
+    createdAt: 'asc' | 'desc';
+    updatedAt: 'asc' | 'desc';
+    publishAt: 'asc' | 'desc';
+    volume: 'asc' | 'desc';
+    chapter: 'asc' | 'desc';
+  };
 }

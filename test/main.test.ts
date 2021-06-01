@@ -1,15 +1,18 @@
+import { error } from 'console';
 import {
-  getMangaList,
+  getChapter,
+  getChapterServerUrl,
   getOneChapter,
   getPageUrl,
   getRandomManga,
-  getServer,
+  searchChapters,
+  searchManga,
 } from '../src';
 
 const randomManga = async () => {
   const manga = await getRandomManga();
   const chapter = await getOneChapter(manga);
-  const serverBaseUrl = await getServer(chapter.id);
+  const serverBaseUrl = await getChapterServerUrl(chapter.id);
   const pageUrls: string[] = [];
   for (const fileName of chapter.attributes.data) {
     pageUrls.push(await getPageUrl(chapter, serverBaseUrl, fileName));
@@ -18,7 +21,7 @@ const randomManga = async () => {
 };
 
 const mangaList = async () => {
-  const mangaListResponse = await getMangaList({
+  const mangaListResponse = await searchManga({
     contentRating: ['suggestive'],
   });
   console.log(mangaListResponse);
@@ -28,7 +31,7 @@ const mangaList = async () => {
   console.log(mangaListResponse.results[index]);
 
   const chapter = await getOneChapter(mangaListResponse.results[index].data);
-  const serverBaseUrl = await getServer(chapter.id);
+  const serverBaseUrl = await getChapterServerUrl(chapter.id);
   const pageUrls: string[] = [];
   for (const fileName of chapter.attributes.data) {
     pageUrls.push(await getPageUrl(chapter, serverBaseUrl, fileName));
@@ -37,4 +40,19 @@ const mangaList = async () => {
   console.log(mangaListResponse.results[0].data, pageUrls);
 };
 
-mangaList();
+const chapter = async () => {
+  const mangaList = await searchManga({ contentRating: ['erotica'] });
+  console.log(mangaList);
+  const index = Math.floor(Math.random() * mangaList.results.length);
+  console.log(index);
+  const manga = mangaList.results[index];
+  console.log(manga);
+  const chapter = await searchChapters({ manga: manga.data.id });
+  console.log(chapter.results);
+};
+
+// randomManga();
+// mangaList();
+describe('chapter', () => {
+  it('should run without error', () => chapter());
+});
