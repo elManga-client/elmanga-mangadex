@@ -7,7 +7,7 @@ import {
   MangaListOptions,
 } from './interfaces';
 
-const optionsToParams = (options: any): URLSearchParams => {
+const optionsToURLParams = (options: any): URLSearchParams => {
   const params = new URLSearchParams(<Record<string, string>>options);
   if (!options) return params;
 
@@ -27,7 +27,7 @@ export const getMangaList = async (
   options?: MangaListOptions
 ): Promise<MangaListResponse> => {
   const url = new URL('https://api.mangadex.org/manga');
-  const params = optionsToParams(options);
+  const params = optionsToURLParams(options);
   url.search = params.toString();
   console.log(url.href);
   const res = await fetch(url.href);
